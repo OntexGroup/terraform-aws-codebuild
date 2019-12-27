@@ -15,6 +15,11 @@ variable "name" {
   description = "Solution name, e.g. 'app' or 'jenkins'"
 }
 
+variable "description" {
+  type = string
+  description = "A short description of the project."
+}
+
 variable "environment_variables" {
   type = list(object(
     {
