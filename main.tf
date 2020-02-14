@@ -113,18 +113,16 @@ data "aws_iam_policy_document" "permissions" {
     sid = ""
 
     actions = [
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:CompleteLayerUpload",
-      "ecr:GetAuthorizationToken",
-      "ecr:InitiateLayerUpload",
-      "ecr:PutImage",
-      "ecr:UploadLayerPart",
-      "ecs:RunTask",
-      "iam:PassRole",
-      "logs:CreateLogGroup",
-      "logs:CreateLogStream",
-      "logs:PutLogEvents",
       "ssm:GetParameters",
+      "logs:PutLogEvents",
+      "logs:CreateLogStream",
+      "logs:CreateLogGroup",
+      "iam:PassRole",
+      "ecs:RunTask",
+      "ecr:BatchGetImage",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:GetAuthorizationToken",
+      "ecr:BatchCheckLayerAvailability"
     ]
 
     effect = "Allow"
@@ -192,6 +190,7 @@ resource "aws_codebuild_project" "default" {
     image           = var.build_image
     type            = "LINUX_CONTAINER"
     privileged_mode = var.privileged_mode
+    image_pull_credentials_type = var.image_pull_credentials_type
 
     environment_variable {
       name  = "AWS_REGION"

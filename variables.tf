@@ -142,6 +142,12 @@ variable "image_tag" {
   description = "(Optional) Docker image tag in the ECR repository, e.g. 'latest'. Used as CodeBuild ENV variable when building Docker images. For more info: http://docs.aws.amazon.com/codebuild/latest/userguide/sample-docker.html"
 }
 
+variable "image_pull_credentials_type" {
+  type = string 
+  default = "CODEBUILD"
+  description = "The type of credentials AWS CodeBuild uses to pull images in your build. Available values for this parameter are CODEBUILD or SERVICE_ROLE. When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials. Default to CODEBUILD" 
+}
+
 variable "source_type" {
   type        = string
   default     = "CODEPIPELINE"
