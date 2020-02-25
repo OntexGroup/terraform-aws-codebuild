@@ -171,3 +171,8 @@ variable "report_build_status" {
   default     = false
   description = "Set to true to report the status of a build's start and finish to your source provider. This option is only valid when the source_type is BITBUCKET or GITHUB"
 }
+
+variable "s3_output_artifacts" {
+  type = string
+  description = "S3 artifacts output bucket for codebuild"
+}

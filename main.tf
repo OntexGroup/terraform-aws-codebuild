@@ -110,8 +110,8 @@ resource "aws_iam_policy" "default_cache_bucket" {
 
 data "aws_iam_policy_document" "permissions" {
   statement {
-    sid = ""
-
+    sid = "CodebuildActions"
+    effect = "Allow"
     actions = [
       "ssm:GetParameters",
       "logs:PutLogEvents",
@@ -125,10 +125,20 @@ data "aws_iam_policy_document" "permissions" {
       "ecr:BatchCheckLayerAvailability"
     ]
 
-    effect = "Allow"
-
     resources = [
       "*",
+    ]
+  }
+  
+  statement {
+    sid = "OutputArtifactsBucket"
+    effect = "Allow"
+    actions = [
+      "*",
+    ]
+    resources = [
+      "arn:aws:s3:::${var.s3_output_artifacts}/",
+      "arn:aws:s3:::${var.s3_output_artifacts}/*",
     ]
   }
 }
